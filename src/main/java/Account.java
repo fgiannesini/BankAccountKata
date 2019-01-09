@@ -2,8 +2,18 @@ import java.time.LocalDate;
 
 public class Account {
 
-    private LocalDate date;
-    private Double amount;
-    private Double balance;
+    private double balance;
 
+
+    public void deposit(Double amount, LocalDate pastDate) {
+
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void apply(Deposit deposit, LocalDate date) {
+
+    }
 }
