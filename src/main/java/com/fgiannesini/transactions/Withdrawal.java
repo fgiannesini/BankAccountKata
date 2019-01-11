@@ -1,6 +1,6 @@
 package com.fgiannesini.transactions;
 
-public final class Withdrawal {
+public final class Withdrawal{
 
     private final double amount;
 

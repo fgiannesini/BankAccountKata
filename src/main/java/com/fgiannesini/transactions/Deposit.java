@@ -1,6 +1,6 @@
 package com.fgiannesini.transactions;
 
-public final class Deposit {
+public final class Deposit{
 
     private final double amount;
 
