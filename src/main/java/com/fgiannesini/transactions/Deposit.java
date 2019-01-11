@@ -1,4 +1,4 @@
-package com.fgiannesini;
+package com.fgiannesini.transactions;
 
 public final class Deposit {
 
@@ -11,11 +11,11 @@ public final class Deposit {
 
     private void checkInput(double amount) {
         if (amount < 0) {
-            throw new IllegalArgumentException("com.fgiannesini.Deposit amount could not be negative");
+            throw new IllegalArgumentException("Deposit amount cannot be negative");
         }
     }
 
-    double getAmount() {
+    public double getAmount() {
         return amount;
     }
 }

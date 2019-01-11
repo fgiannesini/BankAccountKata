@@ -1,5 +1,6 @@
 package com.fgiannesini;
 
+import com.fgiannesini.transactions.Deposit;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -9,37 +10,49 @@ import java.time.LocalDate;
 
 class AccountTest {
 
-    @Nested
-    class DepositTest {
-        @Test
-        @DisplayName("Deposit a positive amount should impact account balance")
-        void deposit_a_positive_amount_should_impact_account_balance() {
-            Account account = new Account();
-            Assertions.assertEquals(0, account.getBalance());
+    @Test
+    @DisplayName("create empty account")
+    void create_empty_account() {
+        Account account = new Account();
+        Assertions.assertEquals(0, account.getBalance());
+    }
 
-            double amount = 3;
+    @Test
+    @DisplayName("create not empty account")
+    void create_not_empty_account() {
+        double initialBalance = -3.4;
+        Account account = new Account(initialBalance);
+        Assertions.assertEquals(initialBalance, account.getBalance());
+    }
+
+    @Nested
+    class DepositImpact {
+
+        @Test
+        @DisplayName("Apply a deposit on initial account should impact balance")
+        void apply_a_deposit_on_initial_account_should_impact_balance() {
+            Account account = new Account(5.4);
+
+            Deposit deposit = new Deposit(3.2);
+            LocalDate date = LocalDate.of(2019, 1, 1);
+            account.apply(deposit, date);
+
+            Assertions.assertEquals(8.6, account.getBalance());
+        }
+
+        @Test
+        @DisplayName("Apply a deposit on negative account should impact balance")
+        void apply_a_deposit_on_negative_account_should_impact_balance() {
+            Account account = new Account(-5.7);
+
+            double amount = 3.2;
             Deposit deposit = new Deposit(amount);
             LocalDate date = LocalDate.of(2019, 1, 1);
             account.apply(deposit, date);
 
-            Assertions.assertEquals(amount, account.getBalance());
-        }
-
-
-        @Test
-        @DisplayName("Deposit a negative should throw an exception")
-        void deposit_a_negative_amount_should_throw_an_exception() {
-            Account account = new Account();
-            Assertions.assertEquals(0, account.getBalance());
-
-            double amount = -3;
-            LocalDate date = LocalDate.of(2019, 1, 1);
-
-            Assertions.assertThrows(IllegalArgumentException.class, () -> {
-                Deposit deposit = new Deposit(amount);
-                account.apply(deposit, date);
-            });
+            Assertions.assertEquals(-2.5, account.getBalance());
         }
     }
+
 
 }
