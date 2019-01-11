@@ -1,8 +1,7 @@
 package com.fgiannesini;
 
 import com.fgiannesini.transactions.Deposit;
-
-import java.time.LocalDate;
+import com.fgiannesini.transactions.Withdrawal;
 
 public final class Account {
 
@@ -19,8 +18,11 @@ public final class Account {
         return balance;
     }
 
-    public void apply(Deposit deposit, LocalDate date) {
+    public void apply(Deposit deposit) {
         balance += deposit.getAmount();
     }
 
+    public void apply(Withdrawal withdrawal) {
+        balance -= withdrawal.getAmount();
+    }
 }
