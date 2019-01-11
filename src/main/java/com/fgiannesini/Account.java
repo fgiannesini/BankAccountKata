@@ -11,6 +11,9 @@ public final class Account {
     }
 
     Account(double initialBalance) {
+        if (initialBalance < 0) {
+            throw new IllegalArgumentException("Account amount can't be negative");
+        }
         balance = initialBalance;
     }
 
@@ -23,6 +26,6 @@ public final class Account {
     }
 
     public void apply(Withdrawal withdrawal) {
-        balance -= withdrawal.getAmount();
+        balance = Math.max(0, balance - withdrawal.getAmount());
     }
 }

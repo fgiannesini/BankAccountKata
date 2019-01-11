@@ -19,18 +19,28 @@ class AccountTest {
     }
 
     @Test
-    @DisplayName("create not empty account")
-    void create_not_empty_account() {
-        double initialBalance = -3.4;
+    @DisplayName("create positive account")
+    void create_positive_account() {
+        double initialBalance = 3.4;
         Account account = new Account(initialBalance);
         Assertions.assertEquals(initialBalance, account.getBalance(), DOUBLE_ASSERT_PRECISION);
+    }
+
+    @Test
+    @DisplayName("create negative account should throw an exception")
+    void create_negative_account_should_throw_an_exception() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                ()->new Account(-3.4),
+                "Account amount can't be negative"
+        );
     }
 
     @Nested
     class DepositImpact {
 
         @Test
-        @DisplayName("Apply a deposit on positive account should increase balance")
+        @DisplayName("Apply a deposit account should increase balance")
         void apply_a_deposit_on_positive_account_should_increase_balance() {
             Account account = new Account(5.4);
 
@@ -40,25 +50,14 @@ class AccountTest {
             Assertions.assertEquals(8.6, account.getBalance(), DOUBLE_ASSERT_PRECISION);
         }
 
-        @Test
-        @DisplayName("Apply a deposit on negative account should increase balance")
-        void apply_a_deposit_on_negative_account_should_increase_balance() {
-            Account account = new Account(-5.7);
-
-            double amount = 3.2;
-            Deposit deposit = new Deposit(amount);
-            account.apply(deposit);
-
-            Assertions.assertEquals(-2.5, account.getBalance(), DOUBLE_ASSERT_PRECISION);
-        }
     }
 
     @Nested
     class WithdrawalImpact {
 
         @Test
-        @DisplayName("Apply a withdrawal on positive account should decrease balance")
-        void apply_a_deposit_on_positive_account_should_decrease_balance() {
+        @DisplayName("Apply a withdrawal with amount lower than account amount. Should decrease balance")
+        void apply_a_withdrawal_on_account_should_decrease_balance() {
             Account account = new Account(5.4);
 
             Withdrawal withdrawal = new Withdrawal(3.2);
@@ -68,15 +67,14 @@ class AccountTest {
         }
 
         @Test
-        @DisplayName("Apply a withdrawal on negative account should decrease balance")
-        void apply_a_deposit_on_negative_account_should_decrease_balance() {
-            Account account = new Account(-5.7);
+        @DisplayName("Apply a withdrawal with amount higher than account. Should clear account amount")
+        void apply_a_withdrawal_on_account_should_clear_account_amount() {
+            Account account = new Account(2);
 
-            double amount = 3.2;
-            Withdrawal deposit = new Withdrawal(amount);
-            account.apply(deposit);
+            Withdrawal withdrawal = new Withdrawal(3.2);
+            account.apply(withdrawal);
 
-            Assertions.assertEquals(-8.9, account.getBalance(), DOUBLE_ASSERT_PRECISION);
+            Assertions.assertEquals(0, account.getBalance(), DOUBLE_ASSERT_PRECISION);
         }
     }
 
