@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 public class Transaction {
 
-    private LocalDate applicationDate;
+    private final LocalDate applicationDate;
 
-    private double amount;
+    private final double amount;
 
-    private TransactionType transactionType;
+    private final TransactionType transactionType;
 
     public Transaction(double amount, LocalDate applicationDate, TransactionType transactionType) {
         this.amount = amount;

@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public final class Deposit{
 
     private final double amount;
-    private LocalDate date;
+    private final LocalDate date;
 
     public Deposit(double amount, LocalDate depositDate) {
         this.date = depositDate;

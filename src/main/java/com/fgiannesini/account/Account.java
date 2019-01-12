@@ -7,11 +7,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Account {
+final class Account {
 
     private double balance;
 
-    private List<Transaction> transactions;
+    private final List<Transaction> transactions;
 
     public Account() {
         transactions = new ArrayList<>();

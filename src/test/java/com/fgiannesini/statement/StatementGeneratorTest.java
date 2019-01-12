@@ -33,9 +33,9 @@ class StatementGeneratorTest {
 
         String expectedStatement = "" +
                 "Operation Date Amount Balance\n" +
-                "Withdrawal 31/07/2018 -100.00 150.50\n" +
-                "Withdrawal 31/05/2018 -250.45 250.50\n" +
-                "Deposit 31/01/2018 500.95 500.95";
+                "WITHDRAWAL 31/07/2018 -100,00 150,50\n" +
+                "WITHDRAWAL 31/05/2018 -250,45 250,50\n" +
+                "DEPOSIT 31/01/2018 500,95 500,95";
         Assertions.assertEquals(expectedStatement, statementAsString);
     }
 
