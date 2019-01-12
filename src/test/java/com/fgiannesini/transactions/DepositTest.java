@@ -4,23 +4,27 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class DepositTest {
+import java.time.LocalDate;
 
-    @Test
-    @DisplayName("check initial value is set")
-    void check_initial_value_is_set() {
-        double expectedAmount = 3.5;
-        Deposit deposit = new Deposit(expectedAmount);
-        Assertions.assertEquals(expectedAmount, deposit.getAmount());
-    }
+class DepositTest {
 
     @Test
     @DisplayName("Init with negative amount should throw an exception")
     void init_with_negative_amount_should_throw_an_exception() {
         Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> new Deposit(-3.6),
+                () -> new Deposit(-3.6, LocalDate.of(2019, 1, 1)),
                 "Deposit amount cannot be negative"
+        );
+    }
+
+    @Test
+    @DisplayName("Init without date should throw an exception")
+    void init_without_date_should_throw_an_exception() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new Deposit(3.6, null),
+                "Deposit date must be set"
         );
     }
 

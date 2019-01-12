@@ -14,10 +14,10 @@ import java.util.List;
 class StatementGeneratorTest {
 
     @Test
-    @DisplayName("no transaction should return empty string")
-    void no_transaction_should_return_empty_string() {
+    @DisplayName("no transaction should return header")
+    void no_transaction_should_return_header() {
         String statementAsString = new StatementGenerator().generateStatementAsString(Collections.emptyList());
-        Assertions.assertEquals("", statementAsString);
+        Assertions.assertEquals("Operation Date Amount Balance\n", statementAsString);
     }
 
     @Test

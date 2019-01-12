@@ -32,10 +32,13 @@ public final class Account {
 
     public void apply(Deposit deposit) {
         balance += deposit.getAmount();
+        transactions.add(new Transaction(deposit.getAmount(), deposit.getDate(), TransactionType.DEPOSIT));
     }
 
     public void apply(Withdrawal withdrawal) {
-        balance = Math.max(0, balance - withdrawal.getAmount());
+        double effectiveAmount = Math.min(balance, withdrawal.getAmount());
+        balance -= effectiveAmount;
+        transactions.add(new Transaction(-effectiveAmount, withdrawal.getDate(), TransactionType.WITHDRAWAL));
     }
 
     public List<Transaction> getTransactions() {
